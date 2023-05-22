@@ -30,10 +30,35 @@ class ProfileActivity : AppCompatActivity() {
 
         getDriver()
         binding.imageViewBack.setOnClickListener { finish() }
-
+        binding.btnActualizar.setOnClickListener { actualizarInfo() }
     }
 
+private fun actualizarInfo () {
+    val marcaAutobus = binding.textFieldCarBrand.text.toString()
+    val colorAutobus = binding.textFieldCarColor.text.toString()
+    val placaAutobus = binding.textFieldCarPlate.text.toString()
+    val cooperativaAutobus = binding.textFieldCooperativaP.text.toString()
+    val rutaAutobus = binding.textFieldRutaP.text.toString()
 
+    val driver = Driver(
+        id = authProvider.getId(),
+        brandCar = marcaAutobus,
+        colorCar = colorAutobus,
+        plateNumber = placaAutobus,
+        cooperativa = cooperativaAutobus,
+        ruta = rutaAutobus,
+    )
+
+    driverProvider.actualizar(driver).addOnCompleteListener {
+        if (it.isSuccessful) {
+            Toast.makeText(this@ProfileActivity, "Datos actualizados correctamente", Toast.LENGTH_LONG).show()
+        }
+        else {
+            Toast.makeText(this@ProfileActivity, "Datos no actualizados", Toast.LENGTH_LONG).show()
+        }
+    }
+
+}
 
 
     private fun getDriver() {
@@ -50,6 +75,7 @@ class ProfileActivity : AppCompatActivity() {
             }
         }
     }
+
 
 
 

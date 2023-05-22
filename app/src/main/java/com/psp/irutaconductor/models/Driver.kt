@@ -20,6 +20,7 @@ data class Driver (
     val cooperativa: String? = null,
     val colorCar: String? = null,
     val brandCar: String ? = null,
+    val ruta: String ? = null,
 ) {
 
     public fun toJson() = klaxon.toJsonString(this)

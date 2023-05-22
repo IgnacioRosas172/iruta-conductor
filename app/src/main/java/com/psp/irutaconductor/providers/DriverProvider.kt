@@ -19,4 +19,15 @@ class DriverProvider {
         return db.document(idDriver).get()
     }
 
+    fun actualizar(driver: Driver): Task<Void> {
+        val map: MutableMap<String, Any> = HashMap()
+        map["brandCar"] = driver?.brandCar!!
+        map["colorCar"] = driver?.colorCar!!
+        map["plateNumber"] = driver?.plateNumber!!
+        map["cooperativa"] = driver?.cooperativa!!
+        map["ruta"] = driver?.ruta!!
+
+            return db.document(driver?.id!!).update(map)
+    }
+
 }
